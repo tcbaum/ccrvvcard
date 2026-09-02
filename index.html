@@ -23,6 +23,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- QRCode.js CDN for Share Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        /* CSS Progress Bar Animation */
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .animate-progress {
+            animation: progress 6000ms linear infinite;
+        }
+        .paused {
+            animation-play-state: paused !important;
+        }
+    </style>
 </head>
 <body class="bg-gradient-to-b from-gray-200 via-brandBg to-gray-200 text-brandBlack font-sans antialiased min-h-screen flex justify-center items-center p-4">
 
@@ -31,13 +44,12 @@
         
         <!-- Header Banner & Logo -->
         <header class="bg-brandBg/60 pt-6 pb-6 px-6 flex justify-between items-center border-b border-gray-200/80">
-            <div class="w-6"></div> <!-- Spacer to center logo -->
+            <div class="w-6"></div>
             <img 
                 src="clear-creek-rvs-logo.png" 
                 alt="Clear Creek RVs Logo" 
                 class="h-11 w-auto object-contain"
             />
-            <!-- Share Modal Trigger -->
             <button onclick="openQrModal()" class="text-gray-600 hover:text-brandBlue transition p-1" title="Share Card">
                 <i class="fa-solid fa-qrcode text-xl"></i>
             </button>
@@ -45,7 +57,6 @@
 
         <!-- Profile Section -->
         <section class="text-center px-6 pt-6 pb-4">
-            <!-- Profile Image Container -->
             <div class="relative w-32 h-32 mx-auto mb-4">
                 <img 
                     src="profile-photo.jpg" 
@@ -73,7 +84,6 @@
                     <span class="text-[11px] font-medium text-gray-700 mt-1.5">Call</span>
                 </a>
                 
-                <!-- One-Tap SMS with pre-filled body -->
                 <a href="sms:3252529650?body=Hi%20Taylor,%20I'm%20looking%20for%20information%20on%20an%20RV..." class="flex flex-col items-center group active:scale-95 transition-transform">
                     <div class="w-12 h-12 rounded-2xl bg-brandBlue text-white flex items-center justify-center text-lg shadow-md group-hover:bg-blue-600 transition">
                         <i class="fa-solid fa-comment-dots"></i>
@@ -88,7 +98,6 @@
                     <span class="text-[11px] font-medium text-gray-700 mt-1.5">Email</span>
                 </a>
 
-                <!-- Dynamic vCard Download Button -->
                 <button onclick="downloadVCard()" class="flex flex-col items-center group active:scale-95 transition-transform">
                     <div class="w-12 h-12 rounded-2xl bg-brandBlack text-white flex items-center justify-center text-lg shadow-md group-hover:bg-gray-800 transition">
                         <i class="fa-solid fa-user-plus"></i>
@@ -124,23 +133,28 @@
                 <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
             </a>
 
-            <!-- Customer Reviews Carousel Section -->
-            <div class="bg-gray-100/90 border border-gray-200/80 rounded-xl p-4 transition-all">
-                <div class="flex items-center justify-between mb-2">
+            <!-- Hybrid Autoplay + Swipe Review Carousel Card -->
+            <div id="carouselCard" class="bg-gray-100/90 border border-gray-200/80 rounded-xl p-4 transition-all relative overflow-hidden select-none cursor-grab active:cursor-grabbing">
+                
+                <!-- Autoplay Timer Bar -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-gray-200/80">
+                    <div id="progressBar" class="h-full bg-brandBlue animate-progress"></div>
+                </div>
+
+                <div class="flex items-center justify-between mb-2 mt-1">
                     <div class="flex items-center gap-2">
                         <i class="fa-solid fa-star text-amber-400"></i>
                         <span class="text-xs font-bold text-brandBlack">Customer Reviews</span>
                     </div>
-                    <!-- Controls -->
-                    <div class="flex items-center space-x-1">
-                        <button onclick="prevReview()" class="p-1 text-gray-400 hover:text-brandBlack transition text-xs"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button onclick="nextReview()" class="p-1 text-gray-400 hover:text-brandBlack transition text-xs"><i class="fa-solid fa-chevron-right"></i></button>
-                    </div>
+                    <!-- Direct Google Review Link Icon -->
+                    <a href="https://maps.app.goo.gl/2Kivq8eDqgcvKh6t6" target="_blank" rel="noopener noreferrer" class="text-[10px] text-brandBlue hover:underline font-semibold flex items-center gap-1">
+                        Google <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                    </a>
                 </div>
 
-                <!-- Review Content Slides -->
-                <div id="reviewContainer" class="min-h-[90px] flex flex-col justify-between">
-                    <p id="reviewText" class="text-xs text-gray-600 italic">"I drove from Alabama to Texas to buy my Fifth wheel from Clear Creek after seeing their ad online. I dealt with Taylor and he was very responsive. He kept me informed and answered all my questions... Clear Creek is by far the best buying experience I have ever experienced. I highly recommend them."</p>
+                <!-- Review Content Slide Container -->
+                <div id="reviewContainer" class="min-h-[85px] flex flex-col justify-between transition-opacity duration-300">
+                    <p id="reviewText" class="text-xs text-gray-600 italic">"I drove from Alabama to Texas to buy my Fifth wheel from Clear Creek after seeing their ad online..."</p>
                     <div class="flex justify-between items-center mt-2 pt-2 border-t border-gray-200/60">
                         <span id="reviewAuthor" class="text-[11px] font-bold text-brandBlack">- Buddy D.</span>
                         <div class="text-amber-400 text-[10px]">
@@ -149,10 +163,15 @@
                     </div>
                 </div>
 
-                <!-- Google Reviews Direct Link -->
-                <a href="https://maps.app.goo.gl/2Kivq8eDqgcvKh6t6" target="_blank" rel="noopener noreferrer" class="block text-center text-[10px] font-semibold text-brandBlue hover:underline mt-2 pt-1">
-                    Read More Google Reviews <i class="fa-solid fa-arrow-up-right-from-square text-[8px] ml-0.5"></i>
-                </a>
+                <!-- Pagination Dots & Swipe Hint -->
+                <div class="flex justify-between items-center mt-3 pt-1">
+                    <span class="text-[9px] text-gray-400 flex items-center gap-1">
+                        <i class="fa-solid fa-hand-pointer text-[8px]"></i> Swipe to explore
+                    </span>
+                    <div id="dotsContainer" class="flex space-x-1.5">
+                        <!-- Dots populated via JavaScript -->
+                    </div>
+                </div>
             </div>
 
             <!-- Sales Hours Accordion Drawer -->
@@ -207,9 +226,9 @@
 
     </main>
 
-    <!-- JavaScript Functions -->
+    <!-- JavaScript Engine -->
     <script>
-        // Dynamic vCard (.vcf) Generator
+        // Dynamic vCard Download
         function downloadVCard() {
             const vcard = `BEGIN:VCARD
 VERSION:3.0
@@ -233,7 +252,7 @@ END:VCARD`;
             document.body.removeChild(link);
         }
 
-        // Reviews Data Array
+        // Reviews Data
         const reviews = [
             {
                 text: '"I drove from Alabama to Texas to buy my Fifth wheel from Clear Creek after seeing their ad online. I dealt with Taylor and he was very responsive. He kept me informed and answered all my questions... Clear Creek is by far the best buying experience I have ever experienced. I highly recommend them."',
@@ -253,27 +272,113 @@ END:VCARD`;
             }
         ];
 
-        let currentReviewIndex = 0;
+        let currentIndex = 0;
+        let autoplayTimer = null;
+        const AUTOPLAY_DELAY = 6000;
 
-        function updateReviewDisplay() {
-            const reviewText = document.getElementById('reviewText');
-            const reviewAuthor = document.getElementById('reviewAuthor');
+        // Render Pagination Dots
+        function createDots() {
+            const container = document.getElementById('dotsContainer');
+            container.innerHTML = '';
+            reviews.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.className = `h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-5 bg-brandBlue' : 'w-1.5 bg-gray-300'}`;
+                dot.onclick = () => jumpToSlide(idx);
+                container.appendChild(dot);
+            });
+        }
+
+        // Display Slide
+        function showSlide(index) {
+            const container = document.getElementById('reviewContainer');
+            container.style.opacity = '0';
             
-            reviewText.textContent = reviews[currentReviewIndex].text;
-            reviewAuthor.textContent = reviews[currentReviewIndex].author;
+            setTimeout(() => {
+                currentIndex = index;
+                document.getElementById('reviewText').textContent = reviews[currentIndex].text;
+                document.getElementById('reviewAuthor').textContent = reviews[currentIndex].author;
+                createDots();
+                container.style.opacity = '1';
+                resetProgressBar();
+            }, 150);
         }
 
-        function nextReview() {
-            currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
-            updateReviewDisplay();
+        function nextSlide() {
+            showSlide((currentIndex + 1) % reviews.length);
         }
 
-        function prevReview() {
-            currentReviewIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
-            updateReviewDisplay();
+        function prevSlide() {
+            showSlide((currentIndex - 1 + reviews.length) % reviews.length);
         }
 
-        // Sales Hours Accordion Toggle
+        function jumpToSlide(index) {
+            showSlide(index);
+            restartAutoplay();
+        }
+
+        // Progress Bar Reset Logic
+        function resetProgressBar() {
+            const bar = document.getElementById('progressBar');
+            bar.classList.remove('animate-progress');
+            void bar.offsetWidth; // Trigger reflow
+            bar.classList.add('animate-progress');
+        }
+
+        // Autoplay Controllers
+        function startAutoplay() {
+            stopAutoplay();
+            autoplayTimer = setInterval(nextSlide, AUTOPLAY_DELAY);
+        }
+
+        function stopAutoplay() {
+            if (autoplayTimer) clearInterval(autoplayTimer);
+        }
+
+        function restartAutoplay() {
+            stopAutoplay();
+            startAutoplay();
+        }
+
+        // Swipe & Touch Gesture Logic
+        const card = document.getElementById('carouselCard');
+        const progressBar = document.getElementById('progressBar');
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        card.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoplay();
+            progressBar.classList.add('paused');
+        }, { passive: true });
+
+        card.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            progressBar.classList.remove('paused');
+            restartAutoplay();
+        }, { passive: true });
+
+        // Hover pause for desktop
+        card.addEventListener('mouseenter', () => {
+            stopAutoplay();
+            progressBar.classList.add('paused');
+        });
+
+        card.addEventListener('mouseleave', () => {
+            progressBar.classList.remove('paused');
+            restartAutoplay();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 40;
+            if (touchStartX - touchEndX > swipeThreshold) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                prevSlide();
+            }
+        }
+
+        // Hours Drawer Toggle
         function toggleHours() {
             const drawer = document.getElementById('hoursDrawer');
             const chevron = document.getElementById('hoursChevron');
@@ -281,7 +386,7 @@ END:VCARD`;
             chevron.classList.toggle('rotate-180');
         }
 
-        // Live Open/Closed Status Calculator (Central Time)
+        // Live Open Status
         function checkOpenStatus() {
             const now = new Date();
             const day = now.getDay();
@@ -307,7 +412,7 @@ END:VCARD`;
             }
         }
 
-        // QR Code Modal Functions
+        // Share Modal
         let qrGenerated = false;
         function openQrModal() {
             document.getElementById('qrModal').classList.remove('hidden');
@@ -328,7 +433,9 @@ END:VCARD`;
             document.getElementById('qrModal').classList.add('hidden');
         }
 
-        // Initialize Live Status on Load
+        // Init
+        createDots();
+        startAutoplay();
         checkOpenStatus();
     </script>
 </body>
