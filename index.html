@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taylor Clark Baum - Clear Creek RVs</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlack: '#111111',
+                        brandBlue: '#3B99FC',
+                        brandBg: '#F4F4F4',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-brandBg text-brandBlack font-sans antialiased min-h-screen flex justify-center items-center p-4">
+
+    <!-- Mobile Card Container -->
+    <main class="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 my-auto">
+        
+        <!-- Header Banner & Logo -->
+        <header class="bg-brandBg pt-6 pb-6 px-6 flex justify-center items-center border-b border-gray-200">
+            <img 
+                src="clear-creek-rvs-logo.png" 
+                alt="Clear Creek RVs Logo" 
+                class="h-12 w-auto object-contain"
+            />
+        </header>
+
+        <!-- Profile Section -->
+        <section class="text-center px-6 pt-6 pb-4">
+            <!-- Profile Image Container -->
+            <div class="relative w-32 h-32 mx-auto mb-4">
+                <img 
+                    src="profile-photo.jpg" 
+                    alt="Taylor Clark Baum" 
+                    class="w-full h-full rounded-full object-cover object-top border-4 border-brandBlue shadow-md"
+                />
+            </div>
+            
+            <h1 class="text-2xl font-extrabold text-brandBlack">Taylor Clark Baum</h1>
+            <p class="text-brandBlue font-semibold text-sm mt-1">Sales Representative</p>
+            <p class="text-gray-500 text-xs mt-1"><i class="fa-solid fa-location-dot mr-1"></i>Clear Creek RVs | Abilene, TX</p>
+        </section>
+
+        <!-- Direct Quick Actions -->
+        <section class="px-6 py-2">
+            <div class="grid grid-cols-4 gap-3 text-center">
+                <a href="tel:3252529650" class="flex flex-col items-center group">
+                    <div class="w-12 h-12 rounded-full bg-brandBlue text-white flex items-center justify-center text-lg shadow-md group-hover:bg-blue-600 transition">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <span class="text-[11px] font-medium text-gray-700 mt-1">Call</span>
+                </a>
+                
+                <a href="sms:3252529650" class="flex flex-col items-center group">
+                    <div class="w-12 h-12 rounded-full bg-brandBlue text-white flex items-center justify-center text-lg shadow-md group-hover:bg-blue-600 transition">
+                        <i class="fa-solid fa-comment-dots"></i>
+                    </div>
+                    <span class="text-[11px] font-medium text-gray-700 mt-1">Text</span>
+                </a>
+
+                <a href="mailto:taylor.baum@clearcreekrvs.com" class="flex flex-col items-center group">
+                    <div class="w-12 h-12 rounded-full bg-brandBlue text-white flex items-center justify-center text-lg shadow-md group-hover:bg-blue-600 transition">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <span class="text-[11px] font-medium text-gray-700 mt-1">Email</span>
+                </a>
+
+                <a href="#" class="flex flex-col items-center group">
+                    <div class="w-12 h-12 rounded-full bg-brandBlack text-white flex items-center justify-center text-lg shadow-md group-hover:bg-gray-800 transition">
+                        <i class="fa-solid fa-address-card"></i>
+                    </div>
+                    <span class="text-[11px] font-medium text-gray-700 mt-1">Save</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Primary Action Links -->
+        <section class="px-6 py-4 space-y-3">
+            <a href="https://www.clearcreekrvs.com/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-brandBlack text-white px-5 py-3.5 rounded-xl font-semibold text-sm shadow hover:bg-gray-800 transition">
+                <span class="flex items-center gap-3">
+                    <i class="fa-solid fa-rv text-brandBlue"></i>
+                    Browse Current Inventory
+                </span>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+            </a>
+
+            <a href="https://www.clearcreekrvs.com/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-gray-100 text-brandBlack px-5 py-3.5 rounded-xl font-semibold text-sm border border-gray-200 hover:bg-gray-200 transition">
+                <span class="flex items-center gap-3">
+                    <i class="fa-solid fa-calculator text-brandBlue"></i>
+                    Value Your Trade-In
+                </span>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+            </a>
+
+            <a href="https://www.clearcreekrvs.com/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-gray-100 text-brandBlack px-5 py-3.5 rounded-xl font-semibold text-sm border border-gray-200 hover:bg-gray-200 transition">
+                <span class="flex items-center gap-3">
+                    <i class="fa-solid fa-calendar-check text-brandBlue"></i>
+                    Schedule a Visit
+                </span>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+            </a>
+        </section>
+
+        <!-- Business Details Footer -->
+        <footer class="bg-brandBg px-6 py-6 mt-2 border-t border-gray-200 text-center">
+            <div class="flex justify-center space-x-4 mb-4 text-brandBlack text-lg">
+                <a href="#" class="hover:text-brandBlue transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="hover:text-brandBlue transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-brandBlue transition"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <p class="text-xs text-gray-500 font-medium">Clear Creek RVs</p>
+            <p class="text-[10px] text-gray-400 mt-1">© 2026 Clear Creek RVs. All Rights Reserved.</p>
+        </footer>
+
+    </main>
+
+</body>
+</html>
