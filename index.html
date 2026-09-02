@@ -21,19 +21,26 @@
     </script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- QRCode.js CDN for Share Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
-<body class="bg-brandBg text-brandBlack font-sans antialiased min-h-screen flex justify-center items-center p-4">
+<body class="bg-gradient-to-b from-gray-200 via-brandBg to-gray-200 text-brandBlack font-sans antialiased min-h-screen flex justify-center items-center p-4">
 
     <!-- Mobile Card Container -->
-    <main class="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 my-auto">
+    <main class="w-full max-w-md bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden border border-white/60 my-auto transition-all relative">
         
         <!-- Header Banner & Logo -->
-        <header class="bg-brandBg pt-6 pb-6 px-6 flex justify-center items-center border-b border-gray-200">
+        <header class="bg-brandBg/60 pt-6 pb-6 px-6 flex justify-between items-center border-b border-gray-200/80">
+            <div class="w-6"></div> <!-- Spacer to center logo -->
             <img 
                 src="clear-creek-rvs-logo.png" 
                 alt="Clear Creek RVs Logo" 
-                class="h-12 w-auto object-contain"
+                class="h-11 w-auto object-contain"
             />
+            <!-- Share Modal Trigger -->
+            <button onclick="openQrModal()" class="text-gray-600 hover:text-brandBlue transition p-1" title="Share Card">
+                <i class="fa-solid fa-qrcode text-xl"></i>
+            </button>
         </header>
 
         <!-- Profile Section -->
@@ -43,15 +50,15 @@
                 <img 
                     src="profile-photo.jpg" 
                     alt="Taylor Clark Baum" 
-                    class="w-full h-full rounded-full object-cover object-top border-4 border-brandBlue shadow-md"
+                    class="w-full h-full rounded-full object-cover object-top border-4 border-brandBlue shadow-lg"
                 />
             </div>
             
-            <h1 class="text-2xl font-extrabold text-brandBlack">Taylor Clark Baum</h1>
-            <p class="text-brandBlue font-semibold text-sm mt-1">Sales Representative</p>
+            <h1 class="text-2xl font-extrabold text-brandBlack tracking-tight">Taylor Clark Baum</h1>
+            <p class="text-brandBlue font-semibold text-sm mt-0.5">Sales Representative</p>
             <p class="text-gray-500 text-xs mt-1">
-                <a href="https://maps.app.goo.gl/2Kivq8eDqgcvKh6t6" target="_blank" rel="noopener noreferrer" class="hover:text-brandBlue transition">
-                    <i class="fa-solid fa-location-dot mr-1"></i>Clear Creek RVs | Abilene, TX
+                <a href="https://maps.app.goo.gl/2Kivq8eDqgcvKh6t6" target="_blank" rel="noopener noreferrer" class="hover:text-brandBlue transition inline-flex items-center gap-1">
+                    <i class="fa-solid fa-location-dot text-brandBlue"></i> Clear Creek RVs | Abilene, TX
                 </a>
             </p>
         </section>
@@ -59,39 +66,41 @@
         <!-- Direct Quick Actions -->
         <section class="px-6 py-2">
             <div class="grid grid-cols-4 gap-3 text-center">
-                <a href="tel:3252529650" class="flex flex-col items-center group">
-                    <div class="w-12 h-12 rounded-full bg-brandBlue text-white flex items-center justify-center text-lg shadow-md group-hover:bg-blue-600 transition">
+                <a href="tel:3252529650" class="flex flex-col items-center group active:scale-95 transition-transform">
+                    <div class="w-12 h-12 rounded-2xl bg-brandBlue text-white flex items-center justify-center text-lg shadow-md group-hover:bg-blue-600 transition">
                         <i class="fa-solid fa-phone"></i>
                     </div>
-                    <span class="text-[11px] font-medium text-gray-700 mt-1">Call</span>
+                    <span class="text-[11px] font-medium text-gray-700 mt-1.5">Call</span>
                 </a>
                 
-                <a href="sms:3252529650" class="flex flex-col items-center group">
-                    <div class="w-12 h-12 rounded-full bg-brandBlue text-white flex items-center justify-center text-lg shadow-md group-hover:bg-blue-600 transition">
+                <!-- One-Tap SMS with pre-filled body -->
+                <a href="sms:3252529650?body=Hi%20Taylor,%20I'm%20looking%20for%20information%20on%20an%20RV..." class="flex flex-col items-center group active:scale-95 transition-transform">
+                    <div class="w-12 h-12 rounded-2xl bg-brandBlue text-white flex items-center justify-center text-lg shadow-md group-hover:bg-blue-600 transition">
                         <i class="fa-solid fa-comment-dots"></i>
                     </div>
-                    <span class="text-[11px] font-medium text-gray-700 mt-1">Text</span>
+                    <span class="text-[11px] font-medium text-gray-700 mt-1.5">Text</span>
                 </a>
 
-                <a href="mailto:taylor.baum@clearcreekrvs.com" class="flex flex-col items-center group">
-                    <div class="w-12 h-12 rounded-full bg-brandBlue text-white flex items-center justify-center text-lg shadow-md group-hover:bg-blue-600 transition">
+                <a href="mailto:taylor.baum@clearcreekrvs.com" class="flex flex-col items-center group active:scale-95 transition-transform">
+                    <div class="w-12 h-12 rounded-2xl bg-brandBlue text-white flex items-center justify-center text-lg shadow-md group-hover:bg-blue-600 transition">
                         <i class="fa-solid fa-envelope"></i>
                     </div>
-                    <span class="text-[11px] font-medium text-gray-700 mt-1">Email</span>
+                    <span class="text-[11px] font-medium text-gray-700 mt-1.5">Email</span>
                 </a>
 
-                <a href="#" class="flex flex-col items-center group">
-                    <div class="w-12 h-12 rounded-full bg-brandBlack text-white flex items-center justify-center text-lg shadow-md group-hover:bg-gray-800 transition">
-                        <i class="fa-solid fa-address-card"></i>
+                <!-- Dynamic vCard Download Button -->
+                <button onclick="downloadVCard()" class="flex flex-col items-center group active:scale-95 transition-transform">
+                    <div class="w-12 h-12 rounded-2xl bg-brandBlack text-white flex items-center justify-center text-lg shadow-md group-hover:bg-gray-800 transition">
+                        <i class="fa-solid fa-user-plus"></i>
                     </div>
-                    <span class="text-[11px] font-medium text-gray-700 mt-1">Save</span>
-                </a>
+                    <span class="text-[11px] font-medium text-gray-700 mt-1.5">Save</span>
+                </button>
             </div>
         </section>
 
         <!-- Primary Action Links -->
         <section class="px-6 py-4 space-y-3">
-            <a href="https://www.clearcreekrvs.com/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-brandBlack text-white px-5 py-3.5 rounded-xl font-semibold text-sm shadow hover:bg-gray-800 transition">
+            <a href="https://www.clearcreekrvs.com/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-brandBlack text-white px-5 py-3.5 rounded-xl font-semibold text-sm shadow-md hover:bg-gray-800 active:scale-[0.98] transition">
                 <span class="flex items-center gap-3">
                     <i class="fa-solid fa-rv text-brandBlue"></i>
                     Browse Current Inventory
@@ -99,7 +108,7 @@
                 <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
             </a>
 
-            <a href="https://www.clearcreekrvs.com/trade-in" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-gray-100 text-brandBlack px-5 py-3.5 rounded-xl font-semibold text-sm border border-gray-200 hover:bg-gray-200 transition">
+            <a href="https://www.clearcreekrvs.com/trade-in" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-gray-100/90 text-brandBlack px-5 py-3.5 rounded-xl font-semibold text-sm border border-gray-200/80 hover:bg-gray-200 active:scale-[0.98] transition">
                 <span class="flex items-center gap-3">
                     <i class="fa-solid fa-calculator text-brandBlue"></i>
                     Value Your Trade-In
@@ -107,27 +116,149 @@
                 <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
             </a>
 
-            <a href="https://www.clearcreekrvs.com/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-gray-100 text-brandBlack px-5 py-3.5 rounded-xl font-semibold text-sm border border-gray-200 hover:bg-gray-200 transition">
+            <a href="https://www.clearcreekrvs.com/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-gray-100/90 text-brandBlack px-5 py-3.5 rounded-xl font-semibold text-sm border border-gray-200/80 hover:bg-gray-200 active:scale-[0.98] transition">
                 <span class="flex items-center gap-3">
                     <i class="fa-solid fa-calendar-check text-brandBlue"></i>
                     Schedule a Visit
                 </span>
                 <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
             </a>
+
+            <!-- Sales Hours Accordion Drawer -->
+            <div class="border border-gray-200/80 rounded-xl overflow-hidden bg-gray-100/90 transition-all">
+                <button onclick="toggleHours()" class="flex items-center justify-between w-full px-5 py-3.5 text-left font-semibold text-sm active:scale-[0.99] transition">
+                    <span class="flex items-center gap-3">
+                        <i class="fa-solid fa-clock text-brandBlue"></i>
+                        Sales Hours
+                        <span id="statusBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-200 text-gray-600">
+                            Loading...
+                        </span>
+                    </span>
+                    <i id="hoursChevron" class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform"></i>
+                </button>
+                <div id="hoursDrawer" class="hidden px-5 pb-4 pt-1 text-xs text-gray-600 border-t border-gray-200/60 space-y-1.5">
+                    <div class="flex justify-between"><span>Monday</span><span>8:00 AM - 6:00 PM</span></div>
+                    <div class="flex justify-between"><span>Tuesday</span><span>8:00 AM - 6:00 PM</span></div>
+                    <div class="flex justify-between"><span>Wednesday</span><span>8:00 AM - 6:00 PM</span></div>
+                    <div class="flex justify-between"><span>Thursday</span><span>8:00 AM - 6:00 PM</span></div>
+                    <div class="flex justify-between"><span>Friday</span><span>8:00 AM - 6:00 PM</span></div>
+                    <div class="flex justify-between font-medium text-brandBlack"><span>Saturday</span><span>9:00 AM - 3:00 PM</span></div>
+                    <div class="flex justify-between text-gray-400"><span>Sunday</span><span>Closed</span></div>
+                </div>
+            </div>
         </section>
 
         <!-- Business Details Footer -->
-        <footer class="bg-brandBg px-6 py-6 mt-2 border-t border-gray-200 text-center">
-            <div class="flex justify-center space-x-5 mb-4 text-brandBlack text-xl">
-                <a href="https://www.facebook.com/ClearCreekRVs" target="_blank" rel="noopener noreferrer" class="hover:text-brandBlue transition"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://www.instagram.com/clearcreekrvs/" target="_blank" rel="noopener noreferrer" class="hover:text-brandBlue transition"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@clearcreekrvs" target="_blank" rel="noopener noreferrer" class="hover:text-brandBlue transition"><i class="fa-brands fa-youtube"></i></a>
+        <footer class="bg-brandBg/60 px-6 py-6 mt-2 border-t border-gray-200 text-center">
+            <div class="flex justify-center space-x-6 mb-4 text-brandBlack text-xl">
+                <a href="https://www.facebook.com/ClearCreekRVs" target="_blank" rel="noopener noreferrer" class="hover:text-brandBlue transition active:scale-90"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/clearcreekrvs/" target="_blank" rel="noopener noreferrer" class="hover:text-brandBlue transition active:scale-90"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@clearcreekrvs" target="_blank" rel="noopener noreferrer" class="hover:text-brandBlue transition active:scale-90"><i class="fa-brands fa-youtube"></i></a>
             </div>
             <p class="text-xs text-gray-500 font-medium">Clear Creek RVs</p>
             <p class="text-[10px] text-gray-400 mt-1">© 2026 Clear Creek RVs. All Rights Reserved.</p>
         </footer>
 
+        <!-- QR Code Share Modal -->
+        <div id="qrModal" class="hidden fixed inset-0 bg-brandBlack/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl p-6 w-full max-w-xs text-center shadow-2xl relative">
+                <button onclick="closeQrModal()" class="absolute top-4 right-4 text-gray-400 hover:text-brandBlack text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <h3 class="text-lg font-bold text-brandBlack">Share My Card</h3>
+                <p class="text-xs text-gray-500 mt-1 mb-4">Scan this code to open my digital business card.</p>
+                <div id="qrcode" class="flex justify-center mb-4"></div>
+                <button onclick="closeQrModal()" class="w-full bg-brandBlack text-white py-2.5 rounded-xl font-semibold text-xs hover:bg-gray-800 transition">
+                    Done
+                </button>
+            </div>
+        </div>
+
     </main>
 
+    <!-- JavaScript Functions -->
+    <script>
+        // Dynamic vCard (.vcf) Generator
+        function downloadVCard() {
+            const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:Taylor Clark Baum
+N:Baum;Taylor;Clark;;
+ORG:Clear Creek RVs
+TITLE:Sales Representative
+TEL;TYPE=CELL:3252529650
+EMAIL;TYPE=WORK:taylor.baum@clearcreekrvs.com
+URL:https://www.clearcreekrvs.com/
+ADR;TYPE=WORK:;;Abilene;TX;;;
+END:VCARD`;
+
+            const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'Taylor_Baum_ClearCreekRVs.vcf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Sales Hours Accordion Toggle
+        function toggleHours() {
+            const drawer = document.getElementById('hoursDrawer');
+            const chevron = document.getElementById('hoursChevron');
+            drawer.classList.toggle('hidden');
+            chevron.classList.toggle('rotate-180');
+        }
+
+        // Live Open/Closed Status Calculator (Central Time)
+        function checkOpenStatus() {
+            const now = new Date();
+            const day = now.getDay(); // 0 = Sun, 1 = Mon, ... 6 = Sat
+            const hour = now.getHours();
+            const minutes = now.getMinutes();
+            const timeInMinutes = hour * 60 + minutes;
+
+            const badge = document.getElementById('statusBadge');
+            let isOpen = false;
+
+            if (day >= 1 && day <= 5) { // Mon-Fri: 8AM-6PM (480-1080 mins)
+                if (timeInMinutes >= 480 && timeInMinutes < 1080) isOpen = true;
+            } else if (day === 6) { // Sat: 9AM-3PM (540-900 mins)
+                if (timeInMinutes >= 540 && timeInMinutes < 900) isOpen = true;
+            }
+
+            if (isOpen) {
+                badge.textContent = "Open Now";
+                badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700";
+            } else {
+                badge.textContent = "Closed";
+                badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-700";
+            }
+        }
+
+        // QR Code Modal Functions
+        let qrGenerated = false;
+        function openQrModal() {
+            document.getElementById('qrModal').classList.remove('hidden');
+            if (!qrGenerated) {
+                new QRCode(document.getElementById("qrcode"), {
+                    text: window.location.href,
+                    width: 180,
+                    height: 180,
+                    colorDark : "#111111",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+                qrGenerated = true;
+            }
+        }
+
+        function closeQrModal() {
+            document.getElementById('qrModal').classList.add('hidden');
+        }
+
+        // Initialize Live Status on Load
+        checkOpenStatus();
+    </script>
 </body>
 </html>
