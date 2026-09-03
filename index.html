@@ -159,7 +159,7 @@
                 </div>
             </div>
 
-            <!-- Glassmorphism Review Carousel -->
+            <!-- Glassmorphism Unclipped Full-Text Review Carousel -->
             <div id="carouselCard" class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 transition-all relative overflow-hidden select-none cursor-grab active:cursor-grabbing shadow-lg">
                 
                 <!-- Autoplay Timer Bar -->
@@ -177,11 +177,11 @@
                     </a>
                 </div>
 
-                <!-- Review Content Slide Container -->
-                <div id="reviewContainer" class="min-h-[140px] flex flex-col justify-between transition-opacity duration-300">
-                    <p id="reviewText" class="text-xs text-slate-200 italic leading-relaxed font-normal">"I drove from Alabama to Texas to buy my Fifth wheel from Clear Creek after seeing their ad online. I dealt with Taylor and he was very responsive. He kept me informed and answered all my questions. I requested extra photos and he sent them immediately. Clear Creek is by far the best buying experience I have ever experienced. I highly recommend them."</p>
+                <!-- Review Content Container with Unrestricted Text Height -->
+                <div id="reviewContainer" class="flex flex-col justify-between transition-opacity duration-300">
+                    <p id="reviewText" class="text-xs text-slate-200 italic leading-relaxed font-normal whitespace-normal break-words"></p>
                     <div class="flex justify-between items-center mt-3 pt-2 border-t border-white/15">
-                        <span id="reviewAuthor" class="text-[11px] font-bold text-white uppercase tracking-wide">- Buddy D.</span>
+                        <span id="reviewAuthor" class="text-[11px] font-bold text-white uppercase tracking-wide"></span>
                         <div class="text-amber-400 text-[10px]">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
@@ -277,7 +277,7 @@ END:VCARD`;
             document.body.removeChild(link);
         }
 
-        // Exact Supplied Reviews Data
+        // Complete Word-for-Word Review Data Array
         const reviews = [
             {
                 text: '"I drove from Alabama to Texas to buy my Fifth wheel from Clear Creek after seeing their ad online. I dealt with Taylor and he was very responsive. He kept me informed and answered all my questions. I requested extra photos and he sent them immediately. Clear Creek is by far the best buying experience I have ever experienced. I highly recommend them."',
@@ -313,7 +313,7 @@ END:VCARD`;
             });
         }
 
-        // Display Slide
+        // Display Full Unclipped Slide
         function showSlide(index) {
             const container = document.getElementById('reviewContainer');
             container.style.opacity = '0';
@@ -458,8 +458,8 @@ END:VCARD`;
             document.getElementById('qrModal').classList.add('hidden');
         }
 
-        // Init
-        createDots();
+        // Initialize Carousel
+        showSlide(0);
         startAutoplay();
         checkOpenStatus();
     </script>
