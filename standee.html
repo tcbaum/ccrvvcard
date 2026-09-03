@@ -35,16 +35,29 @@
     <style>
         body { font-family: 'Open Sans', sans-serif; }
         h1, h2, h3, .font-heading { font-family: 'Montserrat', sans-serif; }
-        /* Fixed 4x6 inch print aspect ratio */
+        
+        /* Fixed 4x6 inch print dimensions */
         .standee-card { width: 4in; height: 6in; }
+        
+        /* Print Styles */
         @media print {
-            body { background: none; padding: 0; margin: 0; }
+            body { 
+                background: none; 
+                padding: 0; 
+                margin: 0; 
+            }
             .no-print { display: none; }
-            .standee-card { box-shadow: none; border: 1px solid #e2e8f0; }
+            .print-cut-wrapper {
+                margin: 0 auto;
+                padding: 0.25in;
+            }
+            .cut-line {
+                border-color: #94a3b8 !important;
+            }
         }
     </style>
 </head>
-<body class="bg-slate-100 min-h-screen flex flex-col items-center justify-center p-6 text-darkSlate">
+<body class="bg-slate-200 min-h-screen flex flex-col items-center justify-center p-6 text-darkSlate">
 
     <!-- Print Action Button (Hidden during print) -->
     <div class="no-print mb-4 text-center">
@@ -53,62 +66,77 @@
         </button>
     </div>
 
-    <!-- 4x6 Outer Standee Container -->
-    <div class="standee-card bg-slate-100 relative overflow-hidden rounded-2xl p-5 border border-slate-200/80 shadow-2xl flex flex-col justify-between">
+    <!-- Outer Printable Cut-Line Wrapper -->
+    <div class="print-cut-wrapper relative">
         
-        <!-- Mesh Orbs Backdrop -->
-        <div class="absolute top-12 left-1/2 -translate-x-1/2 w-56 h-56 bg-brandBlue/25 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-8 right-4 w-36 h-36 bg-brandAmber/30 rounded-full blur-2xl pointer-events-none"></div>
-
-        <!-- Heavy Mesh Glass Overlay Card -->
-        <div class="relative z-10 w-full h-full bg-white/70 backdrop-blur-xl rounded-xl border border-white/60 shadow-[0_8px_32px_0_rgba(59,153,252,0.12)] p-4 flex flex-col justify-between">
+        <!-- Dashed Cutting Guide Frame -->
+        <div class="cut-line relative p-1.5 border-2 border-dashed border-slate-400 rounded-[18px] bg-white/40">
             
-            <!-- Header: Scaled Logo -->
-            <div class="text-center pt-1">
-                <img src="clear-creek-rvs-logo.png" alt="Clear Creek RVs" class="h-16 mx-auto object-contain">
+            <!-- Corner Trim / Scissor Indicators -->
+            <div class="absolute -top-3 left-4 text-slate-400 text-[10px] bg-slate-200 px-1 font-mono no-print">
+                <i class="fa-solid fa-scissors transform -rotate-90 mr-1"></i> CUT HERE (4" x 6")
             </div>
 
-            <!-- Center: Scaled QR Code & Montserrat Title -->
-            <div class="my-auto text-center flex flex-col items-center">
-                <div class="bg-white p-3.5 rounded-2xl shadow-md border-2 border-brandBlue mb-2.5">
-                    <div id="qrcode"></div>
-                </div>
-                <h2 class="font-heading font-black text-sm uppercase tracking-wider text-brandAmber">Scan to Connect</h2>
-                <p class="font-body text-[11px] font-medium text-slate-600 leading-relaxed mt-0.5">Browse Inventory • Trade-In • Reviews</p>
-            </div>
+            <!-- 4x6 Standee Container -->
+            <div class="standee-card bg-slate-100 relative overflow-hidden rounded-2xl border border-slate-200/80 shadow-2xl flex flex-col justify-between">
+                
+                <!-- Mesh Orbs Backdrop -->
+                <div class="absolute top-12 left-1/2 -translate-x-1/2 w-56 h-56 bg-brandBlue/25 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute bottom-8 right-4 w-36 h-36 bg-brandAmber/30 rounded-full blur-2xl pointer-events-none"></div>
 
-            <!-- Profile & Credentials Panel -->
-            <div class="bg-white/70 backdrop-blur-md rounded-xl p-3.5 border border-slate-200/50 shadow-sm">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h1 class="font-heading font-black text-lg uppercase tracking-wider leading-tight text-darkSlate">Taylor Baum</h1>
-                        <p class="font-heading font-bold text-xs text-brandBlue uppercase tracking-wider mt-0.5">Sales Representative</p>
-                        <p class="font-body text-xs font-semibold text-slate-700 mt-1">
-                            <i class="fa-solid fa-phone text-brandBlue mr-1"></i> (325) 252-9650
-                        </p>
+                <!-- Heavy Mesh Glass Overlay Card -->
+                <div class="relative z-10 w-full h-full bg-white/70 backdrop-blur-xl rounded-xl border border-white/60 shadow-[0_8px_32px_0_rgba(59,153,252,0.12)] p-4 flex flex-col justify-between">
+                    
+                    <!-- Header: Scaled Logo -->
+                    <div class="text-center pt-1">
+                        <img src="clear-creek-rvs-logo.png" alt="Clear Creek RVs" class="h-16 mx-auto object-contain">
                     </div>
-                    <!-- Top 50 Badge -->
-                    <div class="text-center border-l border-slate-300/60 pl-3.5">
-                        <img src="top-fifty.jpg" alt="Top 50 Award" class="w-12 h-12 object-contain mx-auto rounded">
-                        <span class="font-heading font-black text-[8px] text-brandAmber uppercase tracking-wider block mt-1">Top 50 Dealer</span>
+
+                    <!-- Center: QR Code with Gradient Fade Border -->
+                    <div class="my-auto text-center flex flex-col items-center">
+                        <div class="p-[2.5px] rounded-[18px] bg-gradient-to-br from-brandBlue via-white/80 to-brandAmber shadow-md mb-2.5">
+                            <div class="bg-white p-3 rounded-[16px]">
+                                <div id="qrcode"></div>
+                            </div>
+                        </div>
+                        <h2 class="font-heading font-black text-sm uppercase tracking-wider text-brandAmber">Scan to Connect</h2>
+                        <p class="font-body text-[11px] font-medium text-slate-600 leading-relaxed mt-0.5">Browse Inventory • Trade-In • Reviews</p>
                     </div>
+
+                    <!-- Profile & Credentials Panel -->
+                    <div class="bg-white/70 backdrop-blur-md rounded-xl p-3.5 border border-slate-200/50 shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h1 class="font-heading font-black text-lg uppercase tracking-wider leading-tight text-darkSlate">Taylor Baum</h1>
+                                <p class="font-heading font-bold text-xs text-brandBlue uppercase tracking-wider mt-0.5">Sales Representative</p>
+                                <p class="font-body text-xs font-semibold text-slate-700 mt-1">
+                                    <i class="fa-solid fa-phone text-brandBlue mr-1"></i> (325) 252-9650
+                                </p>
+                            </div>
+                            <!-- Top 50 Badge -->
+                            <div class="text-center border-l border-slate-300/60 pl-3.5">
+                                <img src="top-fifty.jpg" alt="Top 50 Award" class="w-12 h-12 object-contain mx-auto rounded">
+                                <span class="font-heading font-black text-[8px] text-brandAmber uppercase tracking-wider block mt-1">Top 50 Dealer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="text-center pt-2 border-t border-slate-200/60">
+                        <p class="font-heading font-bold text-[9px] text-slate-500 uppercase tracking-wider">Clear Creek RVs • Abilene, TX</p>
+                    </div>
+
                 </div>
             </div>
-
-            <!-- Footer -->
-            <div class="text-center pt-2 border-t border-slate-200/60">
-                <p class="font-heading font-bold text-[9px] text-slate-500 uppercase tracking-wider">Clear Creek RVs • Abilene, TX</p>
-            </div>
-
         </div>
     </div>
 
     <script>
         // Generate QR code dynamically
         new QRCode(document.getElementById("qrcode"), {
-            text: window.location.href, // Replaces with current URL or custom landing page link
-            width: 140,
-            height: 140,
+            text: window.location.href,
+            width: 135,
+            height: 135,
             colorDark : "#111827",
             colorLight : "#ffffff",
             correctLevel : QRCode.CorrectLevel.H
